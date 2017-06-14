@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "Collections";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .ng-hide {
+        transition: 0.5s linear all;
+        opacity: 0;
+    }
+
+    .container.ng-hide {
+        transition: 0.5s linear all;
+        opacity: 0;
+    }
+
+    .col-md-8.ng-hide {
+        transition: 0.5s linear all;
+        opacity: 0;
+    }
+</style>
+
+
+<div ng-controller="rugsController as rugsCtrl">
+
+    <div class="body-content">
+        <div class="row">
+            <h2>Rugs</h2>
+        </div>
+        <div class="row">
+            {{rugsCtrl.message}}
+            <div ng-show="rugsCtrl.displayBodyContent" class="container ng-hide">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>{{rugsCtrl.heading}}</strong>
+                            </div>
+                            <div class="panel-body">
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-hide="rugsCtrl.selectedItem"
+                                        ng-click="rugsCtrl.createRugs()">
+                                    Add Rug
+                                </button>
+                                <form id="createRugsForm" name="createRugsForm" ng-show="rugsCtrl.selectedItem" class="ng-hide" novalidate>
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="form-group"
+                                                 ng-class="{'has-error': createRugsForm.rugName.$invalid && createRugsForm.rugName.$pristine}">
+                                                <div class="col-md-6 col-sm-6">
+                                                    <label>Rug Name</label>
+                                                    <input type="text"
+                                                           ng-model="rugsCtrl.selectedItem.rugName"
+                                                           id="rugName"
+                                                           name="rugName"
+                                                           value=""
+                                                           class="form-control" />
+                                                    <p ng-show="createRugsForm.rugName.$invalid && createRugsForm.rugName.$pristine"
+                                                       class="help-block">
+                                                        Rug Name is required
+                                                    </p>
+
+                                                    <label>Price</label>
+                                                    <input type="text"
+                                                           ng-model="rugsCtrl.selectedItem.price"
+                                                           id="price"
+                                                           name="price"
+                                                           value=""
+                                                           class="form-control" />
+                                                    <p ng-show="createRugsForm.price.$invalid && createRugsForm.price.$pristine"
+                                                       class="help-block">
+                                                        Price is required
+                                                    </p>
+
+                                                    <label>Size</label>
+                                                    <input type="text"
+                                                           ng-model="rugsCtrl.selectedItem.size"
+                                                           id="size"
+                                                           name="size"
+                                                           value=""
+                                                           class="form-control" />
+
+                                                    <label>Material</label>
+                                                    <input type="text"
+                                                           ng-model="rugsCtrl.selectedItem.material"
+                                                           id="material"
+                                                           name="material"
+                                                           value=""
+                                                           class="form-control" />
+
+                                                    <label>Color</label>
+                                                    <input type="text"
+                                                           ng-model="rugsCtrl.selectedItem.color"
+                                                           id="color"
+                                                           name="color"
+                                                           value=""
+                                                           class="form-control" />
+
+                                                    <label>Url</label>
+                                                    <input type="file" onchange="angular.element(this).scope().readProfile(this.files[0])">
+                                                    @*<input type="text"
+                                                        ng-model="rugsCtrl.selectedItem.url"
+                                                        id="url"
+                                                        name="url"
+                                                        value=""
+                                                        class="form-control" />*@
+                                                </div>
+                                            </div>
+                                            <span class="col-md-6">
+                                                <button id="cmdCreateRugs" ng-click="rugsCtrl.upload()" class="btn btn-default pull-right">
+                                                    Submit
+                                                </button>
+                                            </span>
+                                            <span class="col-md-6">
+                                                <button id="cmdCancelRugs" ng-click="rugsCtrl.cancel()" class="btn btn-default pull-right">
+                                                    Cancel
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="rugsCtrl.displayBodyContent" class="col-md-8 ng-hide">
+                        <div id="panel-1" class="panel panel-default">
+                            <div class="panel-heading">
+                                <span class="panel-title">
+                                    <strong>Rug</strong>
+                                </span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                @*<td>ID</td>*@
+                                                <td>Rug Name</td>
+                                                <td>Price</td>
+                                                <td>Size</td>
+                                                <td>Material</td>
+                                                <td>Color</td>
+                                                <td>Images</td>
+                                                <td>Actions</td>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="rugList">                                          
+                                            <tr ng-repeat="(key, item) in rugsCtrl.items track by key">
+                                                @*<td>{{item.id}}</td>*@
+                                                <td>{{item.rugName}}</td>
+                                                <td>{{item.price}}</td>
+                                                <td>{{item.size}}</td>
+                                                <td>{{item.material}}</td>
+                                                <td>{{item.color}}</td>
+                                                <td><img ng-src="{{item.url}}" height ="80" width="80"/></td>
+                                                <td>
+                                                    <button ng-click="rugsCtrl.edit(item)" class="btn btn-default btn-xs">Edit</button>
+                                                    <button ng-click="rugsCtrl.delete(key, item.id)" class="btn btn-default btn-xs">Delete</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    body {
+        background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQelMBsRSY75LX0nRGKUdKn9lhT_iboj81PMmSi6E1MihzoR3IByA");
+        background-size: 100%;
+    }
+</style>
+
+@*<div class="container" style="margin-left: 30px; text-align: center;">
+    <ul class="pagination">
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+    </ul>
+</div>*@
+
+
+@section scripts{
+    <script type="text/html" id="template">
+        <tr>
+            <td class="id"><!--Id--></td>
+            <td class="rugName"><!--RugName--></td>
+            <td class="price"><!--Price--></td>
+            <td class="size"><!--Size--></td>
+            <td class="material"><!--Material--></td>
+            <td class="color"><!--Color--></td>
+            <td class="url"><!--Url--></td>
+
+            <td class="actions">
+                <button class="edit btn btn-default btn-xs">Edit</button>
+                <button class="delete btn btn-default btn-xs">Delete</button>
+            </td>
+        </tr>
+    </script>
+
+    <script src="~/Scripts/ngCropper.all.min.js"></script>
+    <script src="~/Scripts/app/TenRugs.Services.Rugs.js"></script>
+    <script src="~/Scripts/app/rugs/rugsController.js"></script>
+    <script src="~/Scripts/app/Services/Rugs.js"></script>
+
+
+}
+
