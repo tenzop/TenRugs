@@ -29,7 +29,7 @@
             <h2>Rugs</h2>
         </div>
         <div class="row">
-            {{rugsCtrl.message}}
+            @*{{rugsCtrl.message}}*@
             <div ng-show="rugsCtrl.displayBodyContent" class="container ng-hide">
                 <div class="row">
                     <div class="col-md-4">
@@ -136,7 +136,7 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <td>ID</td>
+                                                @*<td>ID</td>*@
                                                 <td>Rug Name</td>
                                                 <td>Price</td>
                                                 <td>Size</td>
@@ -149,7 +149,7 @@
                                         </thead>
                                         <tbody class="rugList">                                          
                                             <tr ng-repeat="(key, item) in rugsCtrl.items track by key">
-                                                <td>{{item.id}}</td>
+                                                @*<td>{{item.id}}</td>*@
                                                 <td>{{item.rugName}}</td>
                                                 <td>{{item.price}}</td>
                                                 <td>{{item.size}}</td>
@@ -175,7 +175,7 @@
 </div>
 <style>
     body {
-        background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQelMBsRSY75LX0nRGKUdKn9lhT_iboj81PMmSi6E1MihzoR3IByA");
+        background-image: url("http://coolwallpaper.website/wp-content/uploads/2016/11/Best-Light-Blue-S-Wallpaper-HD-Wallpapers-of-Nature-Full-HD-1080p-Desktop-Backgrounds-for-PC-Mac-Laptop-Tablet-lounge-sofa-design.jpg");
         background-size: 100%;
     }
 </style>

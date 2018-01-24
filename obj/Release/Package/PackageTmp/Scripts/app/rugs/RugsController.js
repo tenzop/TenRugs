@@ -17,12 +17,10 @@
         vm.edit = _editRugs;
         vm.delete = _deleteRugs;
         vm.selectedKey = null;
-        //vm.renderRugs = _renderRugs;
 
         vm.items = [];
         vm.selectedItem = null;
-        vm.itemToDelete = null;
-        vm.message = "Welcome to the Rugs page!!!";
+        //vm.message = "Welcome to the Rugs page!!!";
         vm.heading = "Create a new Rugs";
 
 
@@ -82,7 +80,6 @@
             console.log("Rugs Service SelectAll() was successful!");
             console.log(data.data.items);
             vm.items = data.data.items;
-            //vm.renderRugs();
             console.log(vm.items);
         };
 

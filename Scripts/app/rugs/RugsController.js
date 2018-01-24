@@ -20,7 +20,7 @@
 
         vm.items = [];
         vm.selectedItem = null;
-        vm.message = "Welcome to the Rugs page!!!";
+        //vm.message = "Welcome to the Rugs page!!!";
         vm.heading = "Create a new Rugs";
 
 
